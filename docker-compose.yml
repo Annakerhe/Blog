@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  main:
+    container_name: app-blogs-container
+    image: blogs-app:v1
+    depends_on:
+      - postgres-db
+    environment:
+      DB_URL: jdbc:postgresql://postgres-db:5432/blog_db
+      DB_USER: blog_user
+      DB_PASSWORD: blog_user
+      TZ: 'Europe/Moscow'
+      JAVA_OPTS: -Xms512m -Xmx1024m
+    ports:
+      - 8282:8080
+    networks:
+      - local-net
+  postgres-db:
+    container_name: app-pg14
+    image: postgres:14.4
+    environment:
+      POSTGRES_DB: blog_db
+      POSTGRES_USER: blog_user
+      POSTGRES_PASSWORD: blog_user
+    ports:
+      - 25432:5432
+    networks:
+      - local-net
+    volumes:
+      - postgres:/var/lib/postgresql
+      - postgres_data:/var/lib/postgresql/data
+networks:
+  local-net:
+    driver: bridge
+volumes:
+  postgres:
+  postgres_data:
