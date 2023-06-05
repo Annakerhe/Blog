@@ -1,4 +1,4 @@
-package ru.vsu.spring.blogapp.domain.mapper;
+package ru.vsu.spring.blogapp.controller.mapper;
 
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,6 @@ import ru.vsu.spring.blogapp.domain.entity.CommentEntity;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-@Component
 public interface CommentMapper {
     CommentDto toDto(CommentEntity comment);
 

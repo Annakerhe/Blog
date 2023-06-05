@@ -1,18 +1,19 @@
 package ru.vsu.spring.blogapp.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.spring.blogapp.domain.entity.CommentEntity;
 import ru.vsu.spring.blogapp.service.CommentService;
 
 import java.util.List;
-
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/blog/comment/{articleId}")
 public class CommentController {
     private CommentService commentService;
-    @GetMapping
+    @GetMapping("/")
     public List<CommentEntity> getAllArticles(@PathVariable Long articleId) {
        return commentService.getAllByArticleId(articleId);
 

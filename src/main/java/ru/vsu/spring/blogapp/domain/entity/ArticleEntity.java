@@ -2,6 +2,7 @@ package ru.vsu.spring.blogapp.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Date;
 
@@ -20,6 +21,7 @@ public class ArticleEntity {
     @Column(name = "title")
     private String title;
 
+    @CreatedDate
     @Column(name = "publish_date")
     private Date publishDate;
 

@@ -1,12 +1,13 @@
 package ru.vsu.spring.blogapp.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.spring.blogapp.domain.entity.AuthorEntity;
 import ru.vsu.spring.blogapp.service.AuthorService;
 
 import java.util.List;
-
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/blog/author")
