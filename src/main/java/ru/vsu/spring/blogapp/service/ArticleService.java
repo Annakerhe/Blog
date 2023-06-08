@@ -16,34 +16,26 @@ import java.util.Optional;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
-    @Transactional(readOnly = true)
     public ArticleEntity getById(Long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
     }
 
-
-    @Transactional(readOnly = true)
     public ArticleEntity getByTitle(String title) {
         return articleRepository.findByTitle(title)
                 .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
     }
 
-
-    @Transactional(readOnly = true)
     public List<ArticleEntity> getAll() {
         return articleRepository.findAll();
                 //.orElseThrow(() -> new ResourceNotFoundException("Articles not found"));
     }
 
-
-    @Transactional(readOnly = true)
     public List<ArticleEntity> getAllByPublishDate(LocalDate date)
     {
         return articleRepository.findAllByPublishDate(date)
                 .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
     }
-
 
     @Transactional
     public ArticleEntity update(ArticleEntity article) {

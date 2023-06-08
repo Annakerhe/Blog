@@ -9,13 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AuthorRepository extends JpaRepository<AuthorEntity, Long> {
-    //Optional<AuthorEntity> findById(Long id);
-
-    // List<AuthorEntity> findAll();
-
-    // Optional<AuthorEntity> findAllByTag
-
-
     Optional<AuthorEntity> findByFullName(String fullName);
 
     @Modifying

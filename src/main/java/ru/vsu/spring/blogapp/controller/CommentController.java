@@ -3,6 +3,8 @@ package ru.vsu.spring.blogapp.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.vsu.spring.blogapp.controller.mapper.CommentMapper;
+import ru.vsu.spring.blogapp.domain.dto.CommentDto;
 import ru.vsu.spring.blogapp.domain.entity.CommentEntity;
 import ru.vsu.spring.blogapp.service.CommentService;
 
@@ -13,26 +15,28 @@ import java.util.List;
 @RequestMapping("/blog/comment/{articleId}")
 public class CommentController {
     private CommentService commentService;
+    private CommentMapper commentMapper;
     @GetMapping("/")
-    public List<CommentEntity> getAllArticles(@PathVariable Long articleId) {
-       return commentService.getAllByArticleId(articleId);
-
+    public List<CommentDto> getAllArticles(@PathVariable Long articleId) {
+       return commentMapper.toDto(commentService.getAllByArticleId(articleId));
     }
     @GetMapping("/{authorId}")
-    public List<CommentEntity> getAllCommentsByAuthorId(@PathVariable Long articleId, @PathVariable Long authorId) {
-        List<CommentEntity> comments = commentService.findAllByArticleIdAndAuthorId (articleId, authorId);
-        return comments;// toDTO
+    public List<CommentDto> getAllCommentsByArticleIdAndAuthorId(@PathVariable Long articleId, @PathVariable Long authorId) {
+        return commentMapper.toDto(commentService.findAllByArticleIdAndAuthorId (articleId, authorId));
     }
 
-
     @PostMapping("/add")
-    public CommentEntity addComment(@RequestBody CommentEntity comment) {
-        return commentService.create(comment);
+    public CommentDto addComment(@RequestBody CommentDto commentDto) {
+        CommentEntity comment = commentMapper.toEntity(commentDto);
+        CommentEntity createdComment = commentService.create(comment);
+        return commentMapper.toDto(createdComment);
     }
 
     @PutMapping("/update")
-    public CommentEntity updateComment(@RequestBody CommentEntity comment) {
-        return  commentService.update(comment);
+    public CommentDto updateComment(@RequestBody CommentDto commentDto) {
+        CommentEntity comment = commentMapper.toEntity(commentDto);
+        CommentEntity updatedComment = commentService.update(comment);
+        return commentMapper.toDto(updatedComment);
     }
 
     @DeleteMapping("/{id}")

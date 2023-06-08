@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -23,7 +24,7 @@ public class ArticleEntity {
 
     @CreatedDate
     @Column(name = "publish_date")
-    private Date publishDate;
+    private LocalDate publishDate;
 
     @Column(name = "body")
     private String body;

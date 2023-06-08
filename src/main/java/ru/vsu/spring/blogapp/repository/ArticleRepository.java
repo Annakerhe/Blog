@@ -12,15 +12,9 @@ import java.util.Optional;
 
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
 
-//    List<ArticleEntity> findAll();
-//
-//    Optional<ArticleEntity> findById(final Long id);
-
     Optional<ArticleEntity> findByTitle(final String title);
 
     Optional<List<ArticleEntity>> findAllByPublishDate(final LocalDate date);
-
-   // List<ArticleEntity> findAllByAuthorId(final Long authorId);
 
     @Modifying
     @Query("DELETE FROM ArticleEntity WHERE id = :id")

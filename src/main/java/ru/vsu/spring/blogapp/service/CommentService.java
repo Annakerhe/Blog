@@ -16,13 +16,12 @@ import java.util.List;
 public class CommentService {
     private final CommentRepository commentRepository;
 
-    @Transactional(readOnly = true)
+
     public List<CommentEntity> getAllByArticleId(Long articleId) {
         return commentRepository.findAllByArticleId(articleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Comments not found"));
     }
 
-    @Transactional(readOnly = true)
     public CommentEntity getByBody(String body) {
         return commentRepository.findByBody(body)
                 .orElseThrow(() -> new ResourceNotFoundException("Comment not found"));
@@ -41,11 +40,11 @@ public class CommentService {
         return comment;
     }
 
-    @Transactional
+
     public void delete(Long id) {
         commentRepository.delete(id);
     }
-    @Transactional(readOnly = true)
+
     public List<CommentEntity> findAllByArticleIdAndAuthorId(Long articleId, Long authorId) {
         return commentRepository.findAllByArticleIdAndAuthorId(articleId,authorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Comments not found"));

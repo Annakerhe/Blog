@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ArticleDto {
-   // private int authorId;
+    @NotBlank
+   private int authorId;
    @NotBlank
    @Size(min = 4, max = 100)
     private String title;

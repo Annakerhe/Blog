@@ -12,6 +12,7 @@ import ru.vsu.spring.blogapp.domain.entity.ArticleEntity;
 import ru.vsu.spring.blogapp.service.ArticleService;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Validated
@@ -32,26 +33,19 @@ public class ArticleController {
         return  articleMapper.toDto(articleService.getById(id));
     }
     @PostMapping("/add")
-    public ResponseEntity<ArticleEntity> addArticle (@RequestBody ArticleEntity article)
+    public ArticleDto addArticle (@RequestBody ArticleDto articleDto)
     {
-        //if(validator.isValidArticle(article))
-        {
-            var createdArticle = articleService.create(article);
-           // from articleDTO, createdArticle.setId(());
-            return ResponseEntity.ok().body(createdArticle);
-        }
-       // return ResponseEntity.badRequest().body(new ArticleEntity());
+       var article = articleMapper.toEntity(articleDto);
+       var createdArticle = articleService.create(article);
+       createdArticle.setPublishDate(LocalDate.now());
+       return articleMapper.toDto(createdArticle);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ArticleEntity>  updateContent( @RequestBody ArticleEntity article) {
-       // if(validator.isValidArticle(article))
-        {
-            var updatedArticle = articleService.update(article);
-            // from articleDTO, createdArticle.setId(());
-            return ResponseEntity.ok().body(updatedArticle);
-        }
-       // return ResponseEntity.badRequest().body(new ArticleEntity());
+    public ArticleDto  updateContent( @RequestBody ArticleDto articleDto) {
+        ArticleEntity article = articleMapper.toEntity(articleDto);
+        ArticleEntity updatedArticle = articleService.update(article);
+        return articleMapper.toDto(updatedArticle);
     }
 
     @DeleteMapping("/{id}")
