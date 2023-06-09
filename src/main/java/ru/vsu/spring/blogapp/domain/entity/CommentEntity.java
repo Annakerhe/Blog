@@ -15,10 +15,10 @@ public class CommentEntity {
     private Long id;
 
     @Column(name = "author_id", insertable=false, updatable=false)
-    private int authorId;
+    private Long authorId;
 
     @Column(name = "article_id", insertable=false, updatable=false)
-    private int articleId;
+    private Long articleId;
 
     @Column(name = "publish_date")
     private LocalDate publishDate;

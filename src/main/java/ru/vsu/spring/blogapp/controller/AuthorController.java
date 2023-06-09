@@ -34,14 +34,14 @@ public class AuthorController {
     }
 
     @PutMapping("/update")
-    public AuthorDto updatePerson(@RequestBody AuthorDto authorDto) {
+    public AuthorDto updateAuthor(@RequestBody AuthorDto authorDto) {
         AuthorEntity author = authorMapper.toEntity(authorDto);
         AuthorEntity updatedAuthor = authorService.update(author);
         return authorMapper.toDto(updatedAuthor);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable Long id) {
+    public void deleteAuthor(@PathVariable Long id) {
         authorService.delete(id);
     }
 }

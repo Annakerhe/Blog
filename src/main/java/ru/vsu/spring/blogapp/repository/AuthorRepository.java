@@ -14,4 +14,8 @@ public interface AuthorRepository extends JpaRepository<AuthorEntity, Long> {
     @Modifying
     @Query("DELETE FROM AuthorEntity WHERE id = :id")
     void delete(Long id);
+
+//    @Query("SELECT * FROM AuthorEntity WHERE login = :login")
+
+    Optional<AuthorEntity> findByLogin(String login);
 }

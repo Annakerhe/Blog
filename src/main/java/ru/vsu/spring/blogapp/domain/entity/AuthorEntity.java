@@ -2,9 +2,11 @@ package ru.vsu.spring.blogapp.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import ru.vsu.spring.blogapp.domain.Role;
 import ru.vsu.spring.blogapp.domain.StatusType;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @Entity
@@ -14,6 +16,15 @@ public class AuthorEntity {
     @Id
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
+//    @Column(columnDefinition = "roles[]")
+    private String roles;
 
     @Column(name = "full_name")
     private String fullName;

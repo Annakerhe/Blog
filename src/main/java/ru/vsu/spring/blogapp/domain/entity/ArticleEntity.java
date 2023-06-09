@@ -17,7 +17,7 @@ public class ArticleEntity {
     private Long id;
 
     @Column(name = "author_id", insertable=false, updatable=false)
-    private int authorId;
+    private Long authorId;
 
     @Column(name = "title")
     private String title;

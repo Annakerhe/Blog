@@ -18,7 +18,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/blog/article")
+@RequestMapping("/api/article")
 public class ArticleController {
     private final ArticleService articleService;
     private final ArticleMapper articleMapper;

@@ -27,6 +27,10 @@ public class AuthorService {
     public AuthorEntity getByFullName(String fullName) {
         return authorRepository.findByFullName(fullName).orElseThrow(() -> new ResourceNotFoundException("Author not found"));
     }
+    public AuthorEntity getByLogin(String login) {
+        return authorRepository.findByLogin(login)
+                .orElseThrow(() -> new ResourceNotFoundException("Author not found"));
+    }
 
     @Transactional
     public AuthorEntity update(AuthorEntity author) {
