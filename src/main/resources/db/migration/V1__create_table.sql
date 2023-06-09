@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS author
     full_name varchar(255) NOT NULL,
     age       int2,
     status    varchar(255),
-    roles     varchar(32) NOT NULL
+    roles     text[] NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS article

@@ -22,7 +22,7 @@ import ru.vsu.spring.blogapp.domain.jwt.JwtProvider;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    private final JwtProvider jwtTokenProvider;
+    private final JwtProvider jwtProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -60,7 +60,7 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 .anonymous().disable()
-                .addFilterBefore(new JwtFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

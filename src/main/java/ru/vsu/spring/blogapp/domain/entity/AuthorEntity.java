@@ -1,12 +1,13 @@
 package ru.vsu.spring.blogapp.domain.entity;
 
+import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 import ru.vsu.spring.blogapp.domain.Role;
 import ru.vsu.spring.blogapp.domain.StatusType;
 
 import java.util.Collection;
-import java.util.Set;
 
 @Data
 @Entity
@@ -23,8 +24,9 @@ public class AuthorEntity {
     @Column(name = "password")
     private String password;
 
-//    @Column(columnDefinition = "roles[]")
-    private String roles;
+    @Type(StringArrayType.class)
+    @Column(name = "roles", columnDefinition = "text[]")
+    private String[] roles;
 
     @Column(name = "full_name")
     private String fullName;
