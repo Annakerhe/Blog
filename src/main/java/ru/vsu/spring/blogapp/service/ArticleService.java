@@ -28,7 +28,6 @@ public class ArticleService {
 
     public List<ArticleEntity> getAll() {
         return articleRepository.findAll();
-                //.orElseThrow(() -> new ResourceNotFoundException("Articles not found"));
     }
 
     public List<ArticleEntity> getAllByPublishDate(LocalDate date)
