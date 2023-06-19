@@ -3,7 +3,7 @@ package ru.vsu.spring.blogapp.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.vsu.spring.blogapp.domain.entity.ArticleEntity;
+import ru.vsu.spring.blogapp.domain.entity.Article;
 import ru.vsu.spring.blogapp.domain.exception.ResourceNotFoundException;
 import ru.vsu.spring.blogapp.repository.ArticleRepository;
 
@@ -16,35 +16,35 @@ import java.util.Optional;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
-    public ArticleEntity getById(Long id) {
+    public Article getById(Long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
     }
 
-    public ArticleEntity getByTitle(String title) {
+    public Article getByTitle(String title) {
         return articleRepository.findByTitle(title)
                 .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
     }
 
-    public List<ArticleEntity> getAll() {
+    public List<Article> getAll() {
         return articleRepository.findAll();
     }
 
-    public List<ArticleEntity> getAllByPublishDate(LocalDate date)
+    public List<Article> getAllByPublishDate(LocalDate date)
     {
         return articleRepository.findAllByPublishDate(date)
                 .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
     }
 
     @Transactional
-    public ArticleEntity update(ArticleEntity article) {
+    public Article update(Article article) {
         articleRepository.save(article);
         return article;
     }
 
     @Transactional
-    public ArticleEntity create(ArticleEntity article) {
-        Optional<ArticleEntity> foundedArticle = articleRepository.findByTitle(article.getTitle());
+    public Article create(Article article) {
+        Optional<Article> foundedArticle = articleRepository.findByTitle(article.getTitle());
         if (foundedArticle.isPresent() && foundedArticle.get().getAuthorId() == article.getAuthorId()) {
                 throw new IllegalStateException("Article already exists.");
         }

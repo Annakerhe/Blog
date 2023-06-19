@@ -3,12 +3,11 @@ package ru.vsu.spring.blogapp.controller;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.spring.blogapp.controller.mapper.ArticleMapper;
 import ru.vsu.spring.blogapp.domain.dto.ArticleDto;
-import ru.vsu.spring.blogapp.domain.entity.ArticleEntity;
+import ru.vsu.spring.blogapp.domain.entity.Article;
 import ru.vsu.spring.blogapp.service.ArticleService;
 
 
@@ -18,7 +17,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/article")
+@RequestMapping("/articles")
 public class ArticleController {
     private final ArticleService articleService;
     private final ArticleMapper articleMapper;
@@ -35,19 +34,17 @@ public class ArticleController {
     @PostMapping("/add")
     public ArticleDto addArticle (@RequestBody ArticleDto articleDto)
     {
-       var article = articleMapper.toEntity(articleDto);
-       var createdArticle = articleService.create(article);
+       Article article = articleMapper.toEntity(articleDto);
+       Article createdArticle = articleService.create(article);
        createdArticle.setPublishDate(LocalDate.now());
        return articleMapper.toDto(createdArticle);
     }
-
     @PutMapping("/update")
-    public ArticleDto  updateContent( @RequestBody ArticleDto articleDto) {
-        ArticleEntity article = articleMapper.toEntity(articleDto);
-        ArticleEntity updatedArticle = articleService.update(article);
+    public ArticleDto  updateArticle( @RequestBody ArticleDto articleDto) {
+        Article article = articleMapper.toEntity(articleDto);
+        Article updatedArticle = articleService.update(article);
         return articleMapper.toDto(updatedArticle);
     }
-
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         articleService.delete(id);

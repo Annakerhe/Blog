@@ -1,16 +1,16 @@
 package ru.vsu.spring.blogapp.domain.entity;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.sql.Date;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "article")
-public class ArticleEntity {
+@Table(name = "articles")
+public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -31,5 +31,5 @@ public class ArticleEntity {
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false)
-    private AuthorEntity authorByAuthorId;
+    private Author authorByAuthorId;
 }

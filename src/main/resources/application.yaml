@@ -7,13 +7,26 @@ spring:
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
+
   jpa:
-    hibernate.ddl-auto: validate
-    show-sql: ${JPA_SHOW_SQL:false}
-  flyway:
-    baseline-on-migrate: true
-security:
-  jwt:
-    secret: AnnaWhyZ2lodWpyZ2F1cmdpaGRqb2lqa2Fsc2RyZ2lraGFzaW91a2pyaGdhb2k7a
-    access: 3600000
-    refresh: 2592000000
+    hibernate.ddl-auto: update
+    show-sql: ${JPA_SHOW_SQL:true}
+    generate-ddl: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation=true:
+
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+  --flyway:
+  --  baseline-on-migrate: true
+--security:
+ -- jwt:
+ --   secret: AnnaWhyZ2lodWpyZ2F1cmdpaGRqb2lqa2Fsc2RyZ2lraGFzaW91a2pyaGdhb2k7a
+ --   access: 3600000
+--  refresh: 2592000000

@@ -2,15 +2,15 @@ package ru.vsu.spring.blogapp.controller.mapper;
 
 import org.mapstruct.Mapper;
 import ru.vsu.spring.blogapp.domain.dto.ArticleDto;
-import ru.vsu.spring.blogapp.domain.entity.ArticleEntity;
+import ru.vsu.spring.blogapp.domain.entity.Article;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ArticleMapper {
-    ArticleDto toDto(ArticleEntity article);
+    ArticleDto toDto(Article article);
 
-    List<ArticleDto> toDto(List<ArticleEntity> article);
+    List<ArticleDto> toDto(List<Article> article);
 
-    ArticleEntity toEntity(ArticleDto dto);
+    Article toEntity(ArticleDto dto);
 }

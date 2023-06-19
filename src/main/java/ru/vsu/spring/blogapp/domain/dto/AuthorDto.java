@@ -1,20 +1,18 @@
 package ru.vsu.spring.blogapp.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import ru.vsu.spring.blogapp.domain.Role;
+import ru.vsu.spring.blogapp.domain.entity.Role;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class AuthorDto {
-    @NotBlank
+    @NotBlank (message = "Name cannot be empty")
     @Size(min = 4, max = 100)
-    private String fullName;
+    private String username;
 
-    @NotNull(message = "login cannot be empty")
-    private String login;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotNull(message = "password cannot be empty")
@@ -22,5 +20,6 @@ public class AuthorDto {
 
     private Short age;
     private String tag;
-    private String[] roles;
+    private Set<Role> roles;
+  //  private String[] roles;
 }
