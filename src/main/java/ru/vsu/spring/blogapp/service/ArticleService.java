@@ -14,16 +14,17 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
+    public static final String ARTICLE_NOT_FOUND = "Article not found";
     private final ArticleRepository articleRepository;
 
     public Article getById(Long id) {
         return articleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(ARTICLE_NOT_FOUND));
     }
 
     public Article getByTitle(String title) {
         return articleRepository.findByTitle(title)
-                .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(ARTICLE_NOT_FOUND));
     }
 
     public List<Article> getAll() {
@@ -33,7 +34,7 @@ public class ArticleService {
     public List<Article> getAllByPublishDate(LocalDate date)
     {
         return articleRepository.findAllByPublishDate(date)
-                .orElseThrow(() -> new ResourceNotFoundException("Article not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(ARTICLE_NOT_FOUND));
     }
 
     @Transactional
@@ -45,11 +46,10 @@ public class ArticleService {
     @Transactional
     public Article create(Article article) {
         Optional<Article> foundedArticle = articleRepository.findByTitle(article.getTitle());
-        if (foundedArticle.isPresent() && foundedArticle.get().getAuthorId() == article.getAuthorId()) {
+        if (foundedArticle.isPresent() && foundedArticle.get().getAuthorId().equals(article.getAuthorId())) {
                 throw new IllegalStateException("Article already exists.");
         }
-        articleRepository.save(article);
-        return article;
+        return articleRepository.save(article);
     }
 
     public void delete(Long id) {

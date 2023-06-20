@@ -14,30 +14,28 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-
+    public static final String REGISTRATION = "registration";
     @Autowired
     private AuthorService authorService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("authorForm", new Author());
-
-        return "registration";
+        return REGISTRATION;
     }
 
     @PostMapping("/registration")
     public String addAuthor(@ModelAttribute("authorForm") @Valid Author authorForm, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return REGISTRATION;
         }
         if (!authorForm.getPassword().equals(authorForm.getPasswordConfirm())){
             model.addAttribute("passwordError", "Пароли не совпадают");
-            return "registration";
+            return REGISTRATION;
         }
         if (!authorService.save(authorForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-            return "registration";
+            return REGISTRATION;
         }
 
         return "redirect:/";

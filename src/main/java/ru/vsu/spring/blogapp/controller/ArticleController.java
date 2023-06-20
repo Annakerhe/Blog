@@ -3,6 +3,7 @@ package ru.vsu.spring.blogapp.controller;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.spring.blogapp.controller.mapper.ArticleMapper;

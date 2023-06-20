@@ -1,17 +1,12 @@
 package ru.vsu.spring.blogapp;
 
-
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-@ActiveProfiles("test")
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-//@ExtendWith(SpringExtension.class)
-//@SpringBootTest
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+@SpringBootTest
 public abstract class BlogApplicationTests {
 
-	/*@Test
+	@Test
 	void contextLoads() {
-	}*/
+	}
 
 }

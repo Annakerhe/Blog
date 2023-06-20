@@ -39,8 +39,6 @@ public class CommentService {
         commentRepository.save(comment);
         return comment;
     }
-
-
     public void delete(Long id) {
         commentRepository.delete(id);
     }

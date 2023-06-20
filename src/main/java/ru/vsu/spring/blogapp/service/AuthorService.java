@@ -18,7 +18,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,15 +31,18 @@ public class AuthorService implements UserDetailsService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String fullname) throws UsernameNotFoundException {
-        return authorRepository.findByUsername(fullname)
+     @Override
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        return authorRepository.findByUsername(name)
                 .orElseThrow(() -> new UsernameNotFoundException("Author not found"));
     }
-    public Author findUserById(Long id) {
+
+   /* public Author findUserById(Long id) {
         Optional<Author> userFromDb = authorRepository.findById(id);
         return userFromDb.orElse(new Author());
     }
+    */
+
 
     public Author getById(Long id) {
         return authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author not found"));
@@ -57,7 +59,7 @@ public class AuthorService implements UserDetailsService {
         authorRepository.save(author);
         return author;
     }
-
+/*
     @Transactional
     public Author create(Author author) {
         if (authorRepository.findByUsername(author.getUsername()).isPresent()) {
@@ -66,6 +68,8 @@ public class AuthorService implements UserDetailsService {
         authorRepository.save(author);
         return author;
     }
+
+ */
     @Transactional
     public boolean save(Author author) {
        if( authorRepository.findByUsername(author.getUsername()).isPresent())

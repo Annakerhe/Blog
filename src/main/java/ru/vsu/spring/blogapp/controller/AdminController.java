@@ -31,7 +31,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/gt/{id}")
-    public String  gtUser(@PathVariable("Id") Long id, Model model) {
+    public String gtAuthor(@PathVariable("Id") Long id, Model model) {
         model.addAttribute("allAuthors", authorService.authorgtList(id));
         return "admin";
     }

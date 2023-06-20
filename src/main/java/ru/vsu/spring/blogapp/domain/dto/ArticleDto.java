@@ -18,6 +18,5 @@ public class ArticleDto {
     @NotBlank
     @Size(min = 4, max = 255)
     private String body;
-    //private Date publishDate;
 
 }

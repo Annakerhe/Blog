@@ -1,5 +1,6 @@
 package ru.vsu.spring.blogapp.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import ru.vsu.spring.blogapp.service.AuthorService;
 import java.util.List;
 @Validated
 @RestController
+@AllArgsConstructor
 @RequiredArgsConstructor
 @RequestMapping("/author")
 public class AuthorController {
@@ -26,15 +28,6 @@ public class AuthorController {
         return authorMapper.toDto(authorService.getAll());
     }
 
-   /* @PostMapping("/add")
-    public AuthorDto addAuthor(@RequestBody AuthorDto authorDto) {
-        Author author = authorMapper.toEntity(authorDto);
-        Author createdAuthor = authorService.create(author);
-        return authorMapper.toDto(createdAuthor);
-    }
-
-    */
-//TODO: только если это мы
     @PutMapping("/update")
     public AuthorDto updateAuthor(@RequestBody AuthorDto authorDto) {
         Author author = authorMapper.toEntity(authorDto);
